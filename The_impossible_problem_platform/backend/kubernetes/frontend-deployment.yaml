@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tipp-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tipp-frontend
+  template:
+    metadata:
+      labels:
+        app: tipp-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: tipp-frontend:latest
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tipp-frontend
+spec:
+  ports:
+    - port: 3000
+  selector:
+    app: tipp-frontend

@@ -1,0 +1,7 @@
+// Neo4j schema for the problem knowledge graph
+CREATE CONSTRAINT IF NOT EXISTS ON (u:User) ASSERT u.email IS UNIQUE;
+CREATE CONSTRAINT IF NOT EXISTS ON (p:Problem) ASSERT p.id IS UNIQUE;
+CREATE CONSTRAINT IF NOT EXISTS ON (s:Solution) ASSERT s.id IS UNIQUE;
+
+// Example relationship types
+// :SUBMITTED, :DECOMPOSES, :RELATED_TO, :SOLVES, :MENTIONS, :PARTNER_WITH
