@@ -1,16 +1,24 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 
-function getAuthHeaders() {
+function getAuthHeaders(): Record<string, string> {
   if (typeof window === "undefined") return {}
   const token = window.localStorage.getItem("tipp_token")
-  return token ? { Authorization: `Bearer ${token}` } : {}
+  const authHeaders: Record<string, string> = {}
+  if (token) {
+    authHeaders.Authorization = `Bearer ${token}`
+  }
+  return authHeaders
 }
 
 async function request(path: string, options: RequestInit = {}) {
-  const headers: Record<string, string> = {
+  const headers = new Headers({
     "Content-Type": "application/json",
-    ...(options.headers || {}),
     ...getAuthHeaders(),
+  })
+
+  if (options.headers) {
+    const extraHeaders = new Headers(options.headers as HeadersInit)
+    extraHeaders.forEach((value, key) => headers.set(key, value))
   }
 
   const response = await fetch(`${API_URL}${path}`, {
@@ -36,6 +44,7 @@ export async function registerUser(payload: { email: string; password: string; f
 export async function loginUser(payload: { username: string; password: string }) {
   return request("/api/v1/auth/token", {
     method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams(payload),
   })
 }

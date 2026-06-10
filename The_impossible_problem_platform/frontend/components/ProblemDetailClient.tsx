@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { fetchComments, fetchDecomposition, fetchImpact, fetchKnowledgeGraph, fetchProblem, fetchResearch, fetchRoadmap, fetchSolutions, postComment } from "@/lib/api"
-import { ImpactScore, KnowledgeGraph, Problem, ProblemDecomposition, ProblemList, Roadmap, ResearchAssistant, SolutionGenerator, Comment } from "@/lib/types"
+import { ImpactScore, KnowledgeGraph, Problem, ProblemDecomposition, Roadmap, ResearchAssistant, SolutionGenerator, Comment } from "@/lib/types"
 import ProblemTree from "@/components/ProblemTree"
 import KnowledgeGraphView from "@/components/KnowledgeGraph"
 import ImpactRadar from "@/components/ImpactRadar"
