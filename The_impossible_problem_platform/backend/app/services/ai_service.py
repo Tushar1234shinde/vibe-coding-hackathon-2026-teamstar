@@ -3,7 +3,7 @@ import os
 from typing import List
 
 import openai
-from openai.error import OpenAIError
+from openai import OpenAIError
 
 from backend.app.core.config import settings
 from backend.app.models.problem import Problem
