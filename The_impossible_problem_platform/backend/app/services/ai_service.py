@@ -31,7 +31,7 @@ def _call_openai(prompt: str, system: str = "You are an AI research analyst.", t
     openai.api_key = settings.OPENAI_API_KEY
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-4o-mini",
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": system},
                 {"role": "user", "content": prompt},

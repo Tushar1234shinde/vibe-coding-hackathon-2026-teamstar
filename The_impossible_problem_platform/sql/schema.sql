@@ -31,3 +31,26 @@ CREATE TABLE IF NOT EXISTS problem (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+
+CREATE TABLE IF NOT EXISTS solution (
+    id SERIAL PRIMARY KEY,
+    problem_id INTEGER REFERENCES problem(id) ON DELETE CASCADE,
+    owner_id INTEGER REFERENCES "user"(id) ON DELETE SET NULL,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    solution_type TEXT NOT NULL,
+    cost_estimate TEXT NOT NULL,
+    difficulty TEXT NOT NULL,
+    impact_rating INTEGER NOT NULL,
+    time_to_implement TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS comment (
+    id SERIAL PRIMARY KEY,
+    problem_id INTEGER REFERENCES problem(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES "user"(id) ON DELETE SET NULL,
+    content TEXT NOT NULL,
+    upvotes INTEGER NOT NULL DEFAULT 0,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
