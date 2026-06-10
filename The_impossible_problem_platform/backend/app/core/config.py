@@ -19,7 +19,10 @@ class Settings(BaseSettings):
     REDIS_URL: str = "redis://redis:6379/0"
     RABBITMQ_URL: str = "amqp://guest:guest@rabbitmq:5672/"
     model_config = SettingsConfigDict(
-        env_file=Path(__file__).parent.parent.parent / ".env",
+        env_file=(
+            Path(__file__).parent.parent.parent.parent / ".env",
+            Path(__file__).parent.parent.parent / ".env",
+        ),
         env_file_encoding="utf-8",
     )
 

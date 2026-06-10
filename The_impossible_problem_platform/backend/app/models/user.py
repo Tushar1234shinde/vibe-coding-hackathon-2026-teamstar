@@ -1,12 +1,13 @@
 from __future__ import annotations
 from datetime import datetime
+from enum import Enum
 from typing import List, Optional, TYPE_CHECKING
 from sqlmodel import SQLModel, Field, Relationship
 
 if TYPE_CHECKING:
     from backend.app.models.problem import Problem
 
-class UserRole(str):
+class UserRole(str, Enum):
     CONTRIBUTOR = "contributor"
     RESEARCHER = "researcher"
     STUDENT = "student"
