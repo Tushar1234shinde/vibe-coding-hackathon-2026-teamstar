@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.app.api.v1 import auth, problems, users
+from backend.app.api.v1.ai import router as ai_router
 from backend.app.core.config import settings
 from backend.app.db.base import create_db_and_tables
 from backend.app.db.session import engine
@@ -31,6 +32,7 @@ app.add_middleware(
 app.include_router(auth.router, prefix="/api/v1/auth", tags=["auth"])
 app.include_router(users.router, prefix="/api/v1/users", tags=["users"])
 app.include_router(problems.router, prefix="/api/v1/problems", tags=["problems"])
+app.include_router(ai_router, prefix="/api/v1/problems", tags=["ai"])
 
 @app.get("/api/v1/healthz")
 def healthz() -> dict:

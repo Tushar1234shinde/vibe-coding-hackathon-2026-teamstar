@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Optional, TYPE_CHECKING
+from typing import List, Optional, TYPE_CHECKING
 
 from sqlmodel import SQLModel, Field, Relationship
 
@@ -29,6 +29,8 @@ class Problem(ProblemBase, table=True):
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
     owner: Optional[User] = Relationship(back_populates="contributions")
+    solutions: List["Solution"] = Relationship(back_populates="problem")
+    comments: List["Comment"] = Relationship(back_populates="problem")
 
 class ProblemUpdate(SQLModel):
     title: Optional[str] = None

@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     QDRANT_URL: str = "http://qdrant:6333"
     REDIS_URL: str = "redis://redis:6379/0"
     RABBITMQ_URL: str = "amqp://guest:guest@rabbitmq:5672/"
+    OPENAI_API_KEY: str | None = None
     model_config = SettingsConfigDict(
         env_file=(
             Path(__file__).parent.parent.parent.parent / ".env",

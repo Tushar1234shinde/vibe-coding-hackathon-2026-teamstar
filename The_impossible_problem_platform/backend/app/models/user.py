@@ -6,6 +6,8 @@ from sqlmodel import SQLModel, Field, Relationship
 
 if TYPE_CHECKING:
     from backend.app.models.problem import Problem
+    from backend.app.models.solution import Solution
+    from backend.app.models.comment import Comment
 
 class UserRole(str, Enum):
     CONTRIBUTOR = "contributor"
@@ -31,6 +33,8 @@ class User(UserBase, table=True):
     is_active: bool = Field(default=True)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     contributions: List["Problem"] = Relationship(back_populates="owner")
+    solutions: List["Solution"] = Relationship(back_populates="owner")
+    comments: List["Comment"] = Relationship(back_populates="author")
 
 class UserCreate(UserBase):
     password: str
